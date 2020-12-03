@@ -1,0 +1,14 @@
+<view class="pgy_index">
+  <SearchInput></SearchInput>
+  <view class="index_swiper">
+    <swiper autoplay interval="3000" circular>
+      <swiper-item 
+      wx:for="{{swiperList}}" 
+      wx:key="goods_id">
+        <navigator>
+          <image src="{{item.image_src}}" mode="widthFix" />
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
