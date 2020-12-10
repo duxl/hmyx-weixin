@@ -71,6 +71,8 @@ Page({
       // 拼接的数组（分页加载）
       goodsList: [...this.data.goodsList, ...res.goods]
     })
+    // 关闭下拉刷新窗口
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -105,7 +107,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    // 1、重置数组
+    this.setData({
+      goodsList:[]
+    })
+    // 2、重置页码
+    this.QuearyParam.pagenum = 1;
+    // 3、请求数据
+    this.getGoodsList();
   },
 
   /**
