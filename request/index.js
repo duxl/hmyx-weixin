@@ -1,4 +1,7 @@
+// 同时发送异步请求的次数
+let ajaxTimes = 0;
 export const request=(params)=>{
+    ajaxTimes++
     // 显示加载中
     wx.showLoading({
         title: "加载中",
@@ -18,7 +21,11 @@ export const request=(params)=>{
                 reject(err);
             },
             complete: () => {
-                wx.hideLoading();
+                ajaxTimes--
+                if(ajaxTimes <= 0) {
+                    // 关闭窗口
+                    wx.hideLoading();
+                }
             }
         });          
     })
