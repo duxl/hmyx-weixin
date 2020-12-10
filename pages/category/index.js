@@ -12,7 +12,9 @@ Page({
     // 右边商品数据
     rightContent:[],
     // 被点击的左侧菜单索引
-    curentIndex: 0
+    curentIndex: 0,
+    // 右侧滚动条距离顶部的距离
+    scrollTop: 0
   },
   //接口的返回数据
   Cates:[],
@@ -83,7 +85,8 @@ Page({
     let rightContent = this.Cates[curentIndex].children;
     this.setData({
       curentIndex,
-      rightContent
+      rightContent,
+      scrollTop: 0
     })
   },
 
