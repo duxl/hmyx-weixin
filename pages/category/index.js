@@ -1,5 +1,5 @@
-// pages/category/index.js
-import{ request } from "../../request/index.js"
+import{ request } from "../../request/index.js";
+import regeneratorRuntime from '../../lib/runtime/runtime';
 
 Page({
 
@@ -54,6 +54,7 @@ Page({
     }
   },
 
+  /*
   // 获取分类数据
   getCates: function() {
     request({url: "/categories"})
@@ -77,6 +78,29 @@ Page({
         rightContent
       })
     })
+  },
+  */
+
+  // 获取分类数据(使用es7的async await发送异步请求)
+  getCates: async function() { // async异步方法
+    const res = await request({url: "/categories"}) // await 同步等待返回结果
+    this.Cates = res;
+
+      // 把接口返回的数据存入本地缓存中
+      wx.setStorageSync("cates", {
+        time: Date.now(),
+        data: this.Cates
+      });
+        
+
+      // 构造左侧的大菜单数据
+      let leftMenuList = this.Cates.map(v=>v.cat_name)
+      // 构造右侧的商品数据
+      let rightContent = this.Cates[0].children
+      this.setData({
+        leftMenuList,
+        rightContent
+      })
   },
 
   handleItemTap: function(e) {
