@@ -56,7 +56,7 @@ Page({
 
   // 获取分类数据
   getCates: function() {
-    request({url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"})
+    request({url: "/categories"})
     .then(res=>{
       //console.log(res)
       this.Cates = res.data.message;
